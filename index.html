@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>GifTastic</title>
+        <link rel= "stylesheet" type= "text/css" href="assets/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <span class="myheader navbar-brand mb-0 h1">If you can't laugh at politics...</span>
+        </nav>
+        <div id="myBtns"></div>
+        <form id="addGif-form">
+            <label for="gif-input">Search for a new GIF</label>
+            <input type="text" id="gif-input"><br>
+            <input id="addGif" type="submit" value="Gif Search">
+        </form>
+        <div id="gifs"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src= "assets/api.js"></script>
+    </body>
+</html>
