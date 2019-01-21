@@ -31,3 +31,7 @@ form {
     line-height: 150%;
     text-align: center;
 }
+#moreGifs {
+    opacity: 0;
+    margin:3% 5%;
+}
