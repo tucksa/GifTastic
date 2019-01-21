@@ -23,12 +23,13 @@ $("#addGif").click(function(event) {
 function giveMeGif () {
     $("#gifs").empty();
     var poliGif = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+poliGif+"&limit=15&offset=0&rating=PG13&lang=en";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+poliGif+"&limit=21&offset=0&rating=PG13&lang=en";
 
     $.ajax({url:queryURL, method: "GET"})
     .then(function(response){
     console.log(response);
         var results = response.data;
+        
 
         for (var i = 0; i < results.length; i++) {
             var div = $("<div>");
@@ -40,13 +41,29 @@ function giveMeGif () {
             p.addClass("ratings card-text");
             pDiv.append(p);
             var image = $("<img>");
-            image.attr("src", results[i].images.fixed_height.url);
-            image.addClass("card-img-top");
+            image.attr("src", results[i].images.fixed_height_still.url);
+            image.attr("data-still", results[i].images.fixed_height_still.url);
+            image.attr("data-animate", results[i].images.fixed_height.url);
+            image.attr("data-state", "still");
+            image.addClass("gif card-img-top");
             div.append(pDiv);
             div.append(image);
             $("#gifs").append(div);
         }
+
     })
     
 }
 $(document).on("click", ".myBtn", giveMeGif);
+$(document).on("click", ".gif", function() {
+    var state = $(this).attr("data-state");
+    if (state === "still"){
+      var url = $(this).attr("data-animate")
+      $(this).attr("src", url);
+      $(this).attr("data-state", "animate");
+    }else{
+      var url = $(this).attr("data-still")
+      $(this).attr("src", url);
+      $(this).attr("data-state", "still");
+    }
+});
