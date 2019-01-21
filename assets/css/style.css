@@ -1,17 +1,18 @@
 .myBtn {
     padding:1%;
     margin: 1%;
+    margin-top:3%;
 }
 .myCard{
     width:18rem;
     margin:5%;
-    height:18rem;
+    height:19rem;
+    background-color: 	#428bca;
 }
 .ratings{
-    font-size: 100%;
+    font-size: 80%;
     line-height: 150%;
     text-align: center;
-    padding:5%;
 }
 body{
     background-image: url("../images/connectwork.png");
@@ -24,4 +25,9 @@ label {
 }
 form {
     margin:1% 5%;
+}
+.title {
+    font-size: 120%;
+    line-height: 150%;
+    text-align: center;
 }
