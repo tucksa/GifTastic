@@ -23,7 +23,8 @@ $("#addGif").click(function(event) {
 function giveMeGif () {
     $("#gifs").empty();
     var poliGif = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+poliGif+"&limit=15&offset=0&rating=PG13&lang=en";
+    var limit = 15;
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+poliGif+"&limit="+limit+"&offset=0&rating=PG13&lang=en";
     
     $.ajax({url:queryURL, method: "GET"})
     .then(function(response){
@@ -55,7 +56,41 @@ function giveMeGif () {
         };
         
     });
-    
+    $("#moreGifs").click(function(){
+        $("#gifs").empty();
+        limit= limit+6;
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key="+apiKey+"&q="+poliGif+"&limit="+limit+"&offset=0&rating=PG13&lang=en";
+        $.ajax({url:queryURL, method: "GET"})
+        .then(function(response){
+        console.log(response);
+        var results = response.data;
+
+        for (var i = 0; i < results.length; i++) {
+            var div = $("<div>");
+            div.addClass("myCard float-left card text-white bg-info mb-3");
+            var pDiv = $("<div>");
+            pDiv.addClass("card-text");
+            var rating = results[i].rating;
+            var title = results[i].title;
+            var p = $("<p>").text(title);
+            var p2 = $("<p>").text("Rating: " + rating);
+            p.addClass("title card-text");
+            p2.addClass("ratings card-text");
+            pDiv.append(p);
+            pDiv.append(p2);
+            var image = $("<img>");
+            image.attr("src", results[i].images.fixed_height_still.url);
+            image.attr("data-still", results[i].images.fixed_height_still.url);
+            image.attr("data-animate", results[i].images.fixed_height.url);
+            image.attr("data-state", "still");
+            image.addClass("gif card-img-top");
+            div.append(image);
+            div.append(pDiv);
+            $("#gifs").append(div);
+        };
+        
+    });
+    });
 }
 
 
